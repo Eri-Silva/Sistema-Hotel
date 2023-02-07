@@ -29,7 +29,10 @@ public class hotel {
     System.out.println("3- Realizar chekin");
     System.out.println("4- Realizar checkout");
     System.out.println("5- Deletar Quarto");
-    System.out.println("6- Deletar usuario");
+    System.out.println("6- Deletar usuário");
+    System.out.println("7- Editar quarto");
+    System.out.println("8- Editar usuário");
+    System.out.println("X - Fechar sistema");
     int aux = sc.nextInt();
 
     if (aux == 1) {
@@ -108,18 +111,33 @@ public class hotel {
                     } else if (aux == 7){
 
                     System.out.println("Digite o id do quarto para editar");
-                    BigInteger isbnold = sc.nextBigInteger();
+                    int oulId = sc.nextInt();
                     sc.nextLine();
         
-                    System.out.println("Digite nome atual do quarto");
+                    System.out.println("Digite novo nome do quarto");
                     String nome = sc.nextLine();
         
-                    System.out.println("Digite a descrição atual do quarto");
+                    System.out.println("Digite a nova descrição do quarto");
                     String desc = sc.nextLine();
         
+                    qua.setIdQuarto(oulId);
                     qua.setNome(nome);
                     qua.setDescricao(desc);
-                    quaDAO.quaDAO(editQuarto());
+                    quaDAO.editQuarto(qua);
+
+                    } else if (aux == 8) {
+                      System.out.println("Digite o CPF do hóspede que deseja editar: ");
+                      BigInteger cpf = sc.nextBigInteger();
+                      sc.nextLine();
+                      System.out.println("Digite o nome dele: ");
+                      String nome = sc.nextLine();
+                      rec.setCpf(cpf);
+                      rec.setNome(nome);
+                      recDAO.editHospede(rec);
+
+                      
+                    } else {
+                      System.out.println("Sistema fechado");
                     }
     }
 }

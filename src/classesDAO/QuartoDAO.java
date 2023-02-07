@@ -129,15 +129,16 @@ public class QuartoDAO {
 
 
     public void editQuarto(Quarto quarto) {
-        String sql = "update tb_quartos set idQuarto = ?, qua_nome = ? ,qua_descricao = ?, qua_status = 'Disponivel' where idQuarto= ?";
+        String sql = "update tb_quartos set qua_nome = ? ,qua_descricao = ?, qua_status = 'Disponivel' where qua_id = ?";
 
         try {
             dbconn = ConexaoDB.createConnectionToMySQL();
             //inserir os dados
             pstm = (PreparedStatement) dbconn.prepareStatement(sql);
-            pstm.setObject(4, quarto.getIdQuarto());
+           
             pstm.setString(1, quarto.getNome());
             pstm.setString(2, quarto.getDescricao());
+            pstm.setObject(3, quarto.getIdQuarto());
             pstm.executeUpdate();
             int linhasBD = pstm.getUpdateCount();
 

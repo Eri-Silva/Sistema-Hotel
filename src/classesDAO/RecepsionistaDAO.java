@@ -74,4 +74,39 @@ public class RecepsionistaDAO {
             }
         }
     }
+
+    public void editHospede(Recepsionista recepsionista) {
+        String sql = "update tb_recepcionistas set rec_nome = ? , rec_status = 'Ativo' where rec_cpf= ?";
+
+        try {
+            dbconn = ConexaoDB.createConnectionToMySQL();
+            pstm = (PreparedStatement) dbconn.prepareStatement(sql);
+            pstm.setString(1, recepsionista.getNome());
+            pstm.setObject(2, recepsionista.getCpf());
+            pstm.executeUpdate();
+            int linhasBD = pstm.getUpdateCount();
+
+            if (linhasBD == 0) {
+                System.out.println(" Esse hospede não existe");
+            } else {
+                System.out.println("Hóspede editado");
+            }
+        } catch (Exception error) {
+            error.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+
+                }
+                if (dbconn != null) {
+                    dbconn.close();
+                }
+            } catch (Exception error) {
+
+                error.printStackTrace();
+            }
+        }
+
+    }
 }
